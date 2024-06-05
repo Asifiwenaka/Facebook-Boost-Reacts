@@ -3,83 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB AUTO REACT</title>
-    <link rel="icon" type="image/jpg" href="https://i.imgur.com/LYGQz6s.jpeg">
+    <title>FB Reacts Boost</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #313638;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            text-align: pointer;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
         }
 
         .container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 400px;
-            max-width: 100%;
+            background-color: #FAF9F6;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
             margin: 20px;
-        }
-
-        .logo {
-            display: block;
-            margin: 0 auto 20px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
+            animation: slideIn 0.8s ease;
         }
 
         h1 {
-            text-align: center;
-            margin-bottom: 20px;
             color: #1877f2;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         form {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         label {
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            width: 100%;
         }
 
         input, select {
-            padding: 10px;
-            margin-bottom: 10px;
+            padding: 12px;
+            margin-bottom: 25px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
             box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
             font-size: 16px;
         }
 
+        button {
+            padding: 12px 20px;
+            background-color:  #5dbea3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
         button:hover {
-            background-color: #166fe5;
+            background-color: #F0F8FF;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        button:hover:before {
+            width: 0;
+            height: 0;
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        button:hover span {
+            animation: bounce 0.8s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         #response {
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
+            margin-top: 30px;
             font-size: 18px;
             color: #333;
+            font-weight: bold;
         }
 
         .error {
@@ -87,108 +137,65 @@
         }
 
         .success {
-            color: green;
+            color: #34af23;
         }
 
-        .reaction {
-            font-size: 24px;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .info-box {
-            background-color: #e7f3ff;
-            border: 1px solid #b3d7ff;
-            padding: 15px;
-            border-radius: 8px;
+        .guide {
             margin-top: 20px;
-            text-align: center;
+            font-size: 14px;
+            color: #888;
+            text-align: left;
         }
 
-        .info-box h2 {
-            margin: 0;
-            color: #1877f2;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        .info-box p {
-            margin: 10px 0;
-            color: #333;
-        }
-
-        .fb-link {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .fb-link a {
-            padding: 10px 15px;
-            background-color: #4267B2;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        .fb-link a:hover {
-            background-color: #365899;
-        }
-
-        .cokie {
-            display: inline-block;
-            padding: 10px 10px;
-            background-color: #4267B2;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            margin: 0px;
-        }
-
-        .cokie:hover {
-            background-color: #166fe5;
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+            }
+            to {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>FB AUTO REACT</h1>
+        <h1>Facebook React Boost</h1>
         <form id="reactForm">
             <label for="link">Post Link:</label>
-            <input type="text" id="link" name="link" required>
+            <input type="text" id="link" name="link" placeholder="Facebook Link" required>
             
             <label for="type">React Type:</label>
             <select id="type" name="type" required>
-                <option value="LIKE">👍 LIKE</option>
-                <option value="LOVE">❤️ LOVE</option>
-                <option value="CARE">🥰 CARE</option>
-                <option value="HAHA">😂 HAHA</option>
-                <option value="WOW">😮 WOW</option>
-                <option value="SAD">😢 SAD</option>
-                <option value="ANGRY">😡 ANGRY</option>
+                <option value="LIKE">👍 Like</option>
+                <option value="LOVE">❤️ Love</option>
+                <option value="CARE">🥰 Care</option>
+                <option value="HAHA">😂 Haha</option>
+                <option value="WOW">😮 Wow</option>
+                <option value="SAD">😢 Sad</option>
+                <option value="ANGRY">😡 Angry</option>
             </select>
             
             <label for="cookie">Cookie:</label>
-            <input type="text" id="cookie" name="cookie" required>
+            <input type="password" id="cookie" name="cookie" placeholder="Account Cookie" required>
             
-            <button type="submit">Send Reaction</button>
+            <button type="submit"><span>Send Reaction</span></button>
+            <p class="guide">
+                Welcome to the Facebook Auto Reaction tool!<br>
+                This tool allows you to send reactions to Facebook posts.<br><br>
+                ➡️ Use a dummy account<br>
+                ➡️ Get the cookie (Cookiedough) of your dummy account 
+            </p>
         </form>
         <div id="response"></div>
-        <a href="cokie.html" class="cokie">COKIE GETTER</a>
-        <div class="info-box">
-            <p>Version: 1.0.2</p>
-            <p>Welcome to the facebook auto reaction Made by joshua Apostol! This tool allows you to send reactions to fb posts</p>
-            <h2>HOW TO USE</h2>
-            <p>➡️USE DUMMY ACCOUNT</p>
-            <p>➡️GET THE COKIE OF DUMMY</p>
-            <p>➡️GET A COKIE ON KIWI EXTENSION</p>
-            <p>➡️USE COKIE DOUGH ENTENSION</p>
-            <p>➡️WAIT FOR MORE UPDATE...</p>
-        </div>
-        <div class="fb-link">
-            <p>visit the developer and message to report any bug's you encountered</p>
-            <a href="https://www.facebook.com/profile.php?id=100088690249020" target="_blank">DEVELOPER FACEBOOK</a>
-        </div>
     </div>
     <script>
         document.getElementById('reactForm').addEventListener('submit', async (event) => {
@@ -215,18 +222,16 @@
                 if (result.error) {
                     responseElement.textContent = `Error: ${result.error}`;
                     responseElement.className = 'error';
-                } else if (result.cookieError) {
-                    responseElement.textContent = 'Invalid cookie. Please check your cookie and try again.';
-                    responseElement.className = 'error';
                 } else {
-                    responseElement.textContent = result.message;
+                    responseElement.textContent = 'Reaction sent successfully.';
                     responseElement.className = 'success';
                 }
             } catch (error) {
-                responseElement.textContent = 'An error occurred while sending the reaction. Please try again later.';
+                responseElement.textContent = 'An error occurred. Please try again.';
                 responseElement.className = 'error';
             }
         });
+
     </script>
 </body>
 </html>
