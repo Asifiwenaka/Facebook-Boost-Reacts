@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #313638;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             margin: 0;
             padding: 0;
             display: flex;
@@ -27,6 +27,9 @@
             max-width: 400px;
             margin: 20px;
             animation: slideIn 0.8s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -40,33 +43,40 @@
         form {
             display: flex;
             flex-direction: column;
+            width: 100%;
             align-items: center;
-            margin-bottom: 30px;
         }
 
         label {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #333;
             font-size: 18px;
             font-weight: bold;
             text-align: left;
             width: 100%;
+            transition: color 0.3s ease;
         }
 
         input, select {
             padding: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 6px;
             box-sizing: border-box;
             width: 100%;
-            max-width: 300px;
+            max-width: 100%;
             font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 8px rgba(24, 119, 242, 0.3);
         }
 
         button {
             padding: 12px 20px;
-            background-color:  #5dbea3;
+            background-color: #5dbea3;
             color: white;
             border: none;
             border-radius: 6px;
@@ -74,13 +84,14 @@
             font-size: 16px;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             width: 100%;
-            max-width: 300px;
+            max-width: 100%;
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
         }
 
         button:hover {
-            background-color: #F0F8FF;
+            background-color: #4aa37e;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
@@ -130,6 +141,7 @@
             font-size: 18px;
             color: #333;
             font-weight: bold;
+            transition: opacity 0.3s ease;
         }
 
         .error {
@@ -164,6 +176,72 @@
                 transform: translateY(0);
             }
         }
+
+        .spinner {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #5dbea3;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            input, select, button {
+                font-size: 14px;
+                max-width: 100%;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .guide {
+                font-size: 12px;
+            }
+
+            .spinner {
+                width: 40px;
+                height: 40px;
+                border-width: 6px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 20px;
+            }
+
+            input, select, button {
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .guide {
+                font-size: 10px;
+            }
+
+            .spinner {
+                width: 30px;
+                height: 30px;
+                border-width: 4px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -190,11 +268,10 @@
             <button type="submit"><span>Send Reaction</span></button>
             <p class="guide">
                 Welcome to the Facebook Auto Reaction tool!<br>
-                This tool allows you to send reactions to Facebook posts.<br><br>
-                ➡️ Use a dummy account<br>
-                ➡️ Get the cookie (Cookiedough) of your dummy account 
+                This tool allows you to send reactions to Facebook posts.<br>
             </p>
         </form>
+        <div class="spinner" id="spinner"></div>
         <div id="response"></div>
     </div>
     <script>
@@ -206,8 +283,11 @@
             const cookie = document.getElementById('cookie').value;
 
             const responseElement = document.getElementById('response');
-            responseElement.textContent = 'Sending reaction...';
+            const spinner = document.getElementById('spinner');
+
+            responseElement.textContent = '';
             responseElement.className = '';
+            spinner.style.display = 'block';
 
             try {
                 const response = await fetch('/sendreact', {
@@ -229,9 +309,10 @@
             } catch (error) {
                 responseElement.textContent = 'An error occurred. Please try again.';
                 responseElement.className = 'error';
+            } finally {
+                spinner.style.display = 'none';
             }
         });
-
     </script>
 </body>
 </html>
