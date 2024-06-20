@@ -19,9 +19,9 @@
         }
 
         .container {
-            background-color: #FAF9F6;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             padding: 40px;
             width: 90%;
             max-width: 400px;
@@ -61,10 +61,9 @@
             padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 8px;
             box-sizing: border-box;
             width: 100%;
-            max-width: 100%;
             font-size: 16px;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
@@ -79,12 +78,11 @@
             background-color: #5dbea3;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             width: 100%;
-            max-width: 100%;
             position: relative;
             overflow: hidden;
             margin-bottom: 20px;
@@ -200,7 +198,6 @@
 
             input, select, button {
                 font-size: 14px;
-                max-width: 100%;
             }
 
             .container {
@@ -249,7 +246,7 @@
         <form id="reactForm">
             <label for="link">Post Link:</label>
             <input type="text" id="link" name="link" placeholder="Facebook Link" required>
-            
+
             <label for="type">React Type:</label>
             <select id="type" name="type" required>
                 <option value="LIKE">👍 Like</option>
@@ -260,14 +257,14 @@
                 <option value="SAD">😢 Sad</option>
                 <option value="ANGRY">😡 Angry</option>
             </select>
-            
+
             <label for="cookie">Cookie:</label>
             <input type="password" id="cookie" name="cookie" placeholder="Account Cookie" required>
-            
+
             <button type="submit"><span>Send Reaction</span></button>
             <p class="guide">
-                Welcome to the Facebook Auto Reaction tool!<br>
-                This tool allows you to send reactions to Facebook posts.<br>
+               Welcome to the Facebook Auto Reaction tool!<br>
+         This tool allows you to send reactions to Facebook posts.<br>
             </p>
         </form>
         <div class="spinner" id="spinner"></div>
